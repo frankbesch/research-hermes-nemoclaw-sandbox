@@ -1,0 +1,20 @@
+Warning: Unknown toolsets: audio, nemoclaw
+Query: What is my test codename? If you do not know, say so.
+Initializing agent...
+  ⚠ tirith security scanner enabled but not available — command scanning will use pattern matching only
+────────────────────────────────────────
+
+
+╭─ ☤ Hermes ───────────────────────────────────────────────────────────────────╮
+Your test codename is HERON-7.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume <session>
+  hermes -c "What is my test codename? If you do not know…"
+
+Session:        <session>
+Title:          What is my test codename? If you do not know…
+Duration:       3s
+Messages:       2 (1 user, 0 tool calls)
+arm=B task=T4b rc=0 seconds=5

@@ -1,0 +1,33 @@
+Query: Fetch https://docs.nvidia.com/nemoclaw/ and summarize what NemoClaw is in
+exactly three bullets. If you cannot reach the page, say exactly what failed.
+Initializing agent...
+────────────────────────────────────────
+
+
+┌─ Reasoning ──────────────────────────────────────────────────────────────────┐
+The user wants me to fetch a specific NVIDIA documentation page and summarize what
+ NemoClaw is in exactly three bullets. Let me try to fetch this page first.
+└──────────────────────────────────────────────────────────────────────────────┘
+  ┊ 📄 preparing web_extract…
+  ┊ 📄 fetch     docs.nvidia.com  0.4s
+
+┌─ Reasoning ──────────────────────────────────────────────────────────────────┐
+I successfully fetched the page. Now I need to summarize what NemoClaw is in exactly three bullets
+ based on the content I retrieved.
+└──────────────────────────────────────────────────────────────────────────────┘
+
+╭─ ☤ Hermes ───────────────────────────────────────────────────────────────────╮
+- NemoClaw is an open-source reference stack for running qualified AI agents (OpenClaw, Hermes, LangChain Deep Agents Code) more safely inside NVIDIA OpenShell sandboxes, providing guided onboarding, managed inference, network policy, and lifecycle operations
+- It installs and configures OpenShell (part of NVIDIA Agent Toolkit) with credential custody for managed inference and applies the selected agent integration layer and versioned blueprint, keeping qualification-only candidates separate from supported runtimes
+- NemoClaw supports multiple inference providers (local vLLM/Ollama, NVIDIA Endpoints, OpenRouter, OpenAI, Anthropic, Gemini, Model Router) and includes platform-specific quickstarts for DGX Spark, DGX Station, and Windows WSL, with a single-command installer (curl -fsSL https://www.nvidia.com/nemoclaw.sh | bash)
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume <session>
+  hermes -c "Summarize NemoClaw documentation"
+
+Session:        <session>
+Title:          Summarize NemoClaw documentation
+Duration:       8s
+Messages:       4 (1 user, 2 tool calls)
+arm=A task=T2 rc=0 seconds=10

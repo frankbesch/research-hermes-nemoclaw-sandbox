@@ -1,0 +1,22 @@
+Query: Reply with one short sentence: hello from arm A.
+Initializing agent...
+────────────────────────────────────────
+
+
+┌─ Reasoning ──────────────────────────────────────────────────────────────────┐
+The user wants me to reply with one short sentence: "hello from arm A."
+└──────────────────────────────────────────────────────────────────────────────┘
+
+╭─ ☤ Hermes ───────────────────────────────────────────────────────────────────╮
+hello from arm A.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume <session>
+  hermes -c "Friendly greeting"
+
+Session:        <session>
+Title:          Friendly greeting
+Duration:       25s
+Messages:       2 (1 user, 0 tool calls)
+arm=A task=G2 rc=0 seconds=27

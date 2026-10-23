@@ -1,0 +1,20 @@
+Warning: Unknown toolsets: audio, nemoclaw
+Query: Reply with one short sentence: hello from arm B.
+Initializing agent...
+  ⚠ tirith security scanner enabled but not available — command scanning will use pattern matching only
+────────────────────────────────────────
+
+
+╭─ ☤ Hermes ───────────────────────────────────────────────────────────────────╮
+hello from arm B.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume <session>
+  hermes -c "Hello from arm B"
+
+Session:        <session>
+Title:          Hello from arm B
+Duration:       4s
+Messages:       2 (1 user, 0 tool calls)
+arm=B task=G2 rc=0 seconds=6

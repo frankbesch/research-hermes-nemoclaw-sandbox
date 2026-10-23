@@ -1,0 +1,5 @@
+# Secret scan config: every default gitleaks rule; nothing allowlisted.
+title = "research-hermes-nemoclaw-sandbox"
+
+[extend]
+useDefault = true

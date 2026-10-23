@@ -1,0 +1,23 @@
+Warning: Unknown toolsets: audio, nemoclaw
+Query: Remember this for later sessions: my test codename is HERON-7. Confirm 
+when saved.
+Initializing agent...
+  ⚠ tirith security scanner enabled but not available — command scanning will use pattern matching only
+────────────────────────────────────────
+
+  ┊ 🧠 preparing memory…
+  ┊ 🧠 memory    ?  0.0s
+
+╭─ ☤ Hermes ───────────────────────────────────────────────────────────────────╮
+Saved. Your test codename HERON-7 is now in persistent memory and will be available in future sessions.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume <session>
+  hermes -c "Save test codename HERON-7"
+
+Session:        <session>
+Title:          Save test codename HERON-7
+Duration:       12s
+Messages:       4 (1 user, 2 tool calls)
+arm=B task=T4a rc=0 seconds=14

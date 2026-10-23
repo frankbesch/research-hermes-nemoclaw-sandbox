@@ -1,0 +1,24 @@
+Query: What is my test codename? If you do not know, say so.
+Initializing agent...
+────────────────────────────────────────
+
+
+┌─ Reasoning ──────────────────────────────────────────────────────────────────┐
+The user is asking about their test codename. Looking at the system prompt, I can
+ see there's a "USER PROFILE" section that mentions "Test codename: HERON-7". This appears
+ to be part of the environment/context provided to me.
+└──────────────────────────────────────────────────────────────────────────────┘
+
+╭─ ☤ Hermes ───────────────────────────────────────────────────────────────────╮
+Your test codename is HERON-7.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume <session>
+  hermes -c "Test codename query"
+
+Session:        <session>
+Title:          Test codename query
+Duration:       10s
+Messages:       2 (1 user, 0 tool calls)
+arm=A task=T4b rc=0 seconds=12

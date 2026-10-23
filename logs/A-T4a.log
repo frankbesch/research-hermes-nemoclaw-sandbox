@@ -1,0 +1,31 @@
+Query: Remember this for later sessions: my test codename is HERON-7. Confirm 
+when saved.
+Initializing agent...
+────────────────────────────────────────
+
+
+┌─ Reasoning ──────────────────────────────────────────────────────────────────┐
+The user wants me to save a fact to persistent memory that applies to every session. This
+ is exactly what the memory tool is for - saving durable facts like user preferences, identity
+ facts, etc. They want me to remember their test codename "HERON-7".
+└──────────────────────────────────────────────────────────────────────────────┘
+  ┊ 🧠 preparing memory…
+  ┊ 🧠 memory    +user: "Test codename: HERON-7"  0.0s
+
+┌─ Reasoning ──────────────────────────────────────────────────────────────────┐
+The memory has been saved successfully. I should confirm this to the user.
+└──────────────────────────────────────────────────────────────────────────────┘
+
+╭─ ☤ Hermes ───────────────────────────────────────────────────────────────────╮
+Saved.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume <session>
+  hermes -c "Remember this for later sessions: my test…"
+
+Session:        <session>
+Title:          Remember this for later sessions: my test…
+Duration:       5s
+Messages:       4 (1 user, 2 tool calls)
+arm=A task=T4a rc=0 seconds=8
