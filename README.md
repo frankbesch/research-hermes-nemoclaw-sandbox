@@ -4,7 +4,7 @@ What does NVIDIA NemoClaw's OpenShell sandbox change for one always-on agent
 when the model is held constant? Five tasks, two arms, one run each.
 
 ![Type: research study](https://img.shields.io/badge/type-research_study-purple.svg)
-![Status: beta](https://img.shields.io/badge/status-beta-orange.svg)
+![Status: ongoing](https://img.shields.io/badge/status-ongoing-orange.svg)
 [![Harness: bash](https://img.shields.io/badge/harness-bash-blue.svg)](harness/runtask.sh#L1)
 [![Sandbox policy](https://img.shields.io/badge/OpenShell-sandbox_policy-blue.svg)](harness/policy-B.yaml#L1)
 [![Secret scan: gitleaks](https://img.shields.io/badge/secret_scan-gitleaks-blue.svg)](.github/workflows/ci.yml#L1)
@@ -16,7 +16,7 @@ versions, and environment checks come from the operator's run notes.
 
 ## Status
 
-- **Beta.** One run per task per arm, on one macOS host.
+- **Ongoing:** one run so far; the next tests are a stronger injection probe and OpenClaw. One run per task per arm, on one macOS host.
 - **Run:** 2026-10-20, about 12:43 to 12:48 CT. Gates G1 to G4 passed; teardown
   (G5) runs when the rig is retired.
 - **Software, per the run notes:** Hermes v0.22.2; NemoClaw v0.0.136
