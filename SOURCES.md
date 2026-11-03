@@ -176,7 +176,9 @@ The docs cannot settle these. Each one has a gate or a recorded field.
 8. **Tools in arm A's image.** Whether it ships `curl` and `bash`. P1 records
    `unavailable` if not.
 9. **NVIDIA terms.** Rate limits, credit caps, and price for NVIDIA Endpoints.
-10. **macOS sed.** `redact` in `lib.sh` was tested with GNU sed only; the
-    operator's Mac uses BSD sed. Check Q1 catches a miss.
+10. **macOS shell tools: partly checked.** On 2026-11-03 the operator ran
+    `redact` on the Mac (BSD sed) with fake values; the output matched GNU sed.
+    The Mac's default bash (3.2) has not run the real-mode paths yet; `lib.sh`
+    avoids the empty-array expansion that bash 3.2 rejects under `set -u`.
 11. **Hermes and NemoClaw versions.** These quotes describe main on
     2026-11-03; the run will use whatever is installed (gate R0).

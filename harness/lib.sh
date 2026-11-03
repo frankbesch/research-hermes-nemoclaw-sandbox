@@ -30,7 +30,8 @@ c_container() { docker ps -q --filter name=openclaw-sbx- | head -n 1; }
 # env_exec <arm> <stdin 0|1> <script>  — run one sh script inside the arm's execution environment.
 # In dry-run mode it prints the command and touches nothing.
 env_exec() {
-  local arm=$1 in=$2 script=$3 cid flag=()
+  local arm=$1 in=$2 script=$3 cid
+  local -a flag; flag=()   # bash 3.2 (macOS) has no empty-array expansion under set -u; see the ${flag[@]+...} uses below
   if [ "$DRY_RUN" = 1 ]; then
     local shown="'$script'"
     [ ${#script} -gt 80 ] && shown='<script>'
@@ -46,22 +47,22 @@ env_exec() {
   case $arm in
     A) cid=$(a_container) || return 1
        [ "$in" = 1 ] && flag=(-i)
-       docker exec "${flag[@]}" "$cid" sh -c "$script" ;;
+       docker exec ${flag[@]+"${flag[@]}"} "$cid" sh -c "$script" ;;
     B) [ "$in" = 1 ] && flag=(--stdin)
-       nemohermes "$B_SANDBOX" exec --no-tty "${flag[@]}" --timeout 120 -- sh -c "$script" ;;
+       nemohermes "$B_SANDBOX" exec --no-tty ${flag[@]+"${flag[@]}"} --timeout 120 -- sh -c "$script" ;;
     C) [ "$in" = 1 ] && flag=(-i)
        cid=$(c_container)
        if [ -n "$cid" ]; then
          echo "PROBE env_source=live" >&2
-         docker exec "${flag[@]}" "$cid" sh -c "$script"
+         docker exec ${flag[@]+"${flag[@]}"} "$cid" sh -c "$script"
        else
          echo "PROBE env_source=replica" >&2
-         docker run --rm "${flag[@]}" --network none --read-only --cap-drop ALL \
+         docker run --rm ${flag[@]+"${flag[@]}"} --network none --read-only --cap-drop ALL \
            --security-opt no-new-privileges --init --tmpfs /tmp --tmpfs /var/tmp --tmpfs /run \
            -v "$here/workC:/workspace" "$C_IMAGE" sh -c "$script"
        fi ;;
     D) [ "$in" = 1 ] && flag=(--stdin)
-       nemoclaw "$D_SANDBOX" exec --no-tty "${flag[@]}" --timeout 120 -- sh -c "$script" ;;
+       nemoclaw "$D_SANDBOX" exec --no-tty ${flag[@]+"${flag[@]}"} --timeout 120 -- sh -c "$script" ;;
     *) echo "unknown arm: $arm" >&2; return 2 ;;
   esac
 }
