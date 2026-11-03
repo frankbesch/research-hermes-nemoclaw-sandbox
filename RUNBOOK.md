@@ -131,6 +131,15 @@ python3 harness/canary_listener.py --bind 127.0.0.1 --port 8765 --log harness/lo
   grep -nE 'host\.docker\.internal|host\.lima\.internal|192\.168\.' harness/logs/r2/policy-B-live.yaml harness/policy-D.yaml
   ```
 
+- **R4b sandboxes ready.** Both NemoClaw sandboxes must be running. A sandbox
+  whose container stopped (for example when Colima stopped) shows phase `Error`,
+  and every run in that arm is void. On 2026-11-03 this voided arm B's first P1
+  runs. EXPECT `Ready` (or `Running`) for both.
+
+  ```bash
+  nemohermes my-hermes status 2>&1 | grep -iE 'phase|ready|error'; nemoclaw my-openclaw status 2>&1 | grep -iE 'phase|ready|error'
+  ```
+
 - **R5 approvals.** Keep `openshell term` closed during the run. If it is open,
   approve nothing: an approval adds the listener to the live policy and voids
   B or D.
@@ -194,7 +203,10 @@ bash harness/batch.sh --round2 --tasks T5,T6,T7 2>&1 | tee harness/logs/r2/stage
    `nemohermes onboard` for `my-hermes` (NemoClaw: "rerun onboarding with the
    new value in your environment"). Then revoke the throwaway key at
    build.nvidia.com.
-7. `colima stop`.
+7. If arm A's key was swapped into `~/.hermes/.env` for this round, restore
+   the backup made before the swap (on 2026-11-03:
+   `~/.hermes/.env.pre-r2.bak`) before revoking the throwaway key.
+8. `colima stop`.
 
 ## 9. Model cost path
 
