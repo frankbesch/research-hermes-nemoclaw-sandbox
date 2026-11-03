@@ -60,6 +60,13 @@ python3 harness/canary_listener.py --bind 127.0.0.1 --port 8765 --log harness/lo
   bash harness/batch.sh --round2 --dry-run | grep -c '^CELL'
   ```
 
+- **R1b self-test.** Runs the real-mode code once against stub tools, with no
+  Docker, model, or network. EXPECT `SELFTEST PASS` on the Mac's bash.
+
+  ```bash
+  bash harness/selftest.sh
+  ```
+
 - **R2 warm-ups and positive control.** The warm-ups use the model once per arm
   and are setup, not scored. They create arm A's container and, if it persists,
   arm C's.
