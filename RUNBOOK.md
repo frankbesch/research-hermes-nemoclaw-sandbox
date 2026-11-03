@@ -11,8 +11,10 @@ open questions: [SOURCES.md](SOURCES.md). Nothing here has run yet.
 - **Arm A:** Hermes with `terminal.backend docker` and an empty
   `harness/workA/`, as in 10-20.
 - **Arm B:** NemoClaw with the Hermes sandbox `my-hermes`, as in 10-20.
-- **Arm C:** the OpenClaw CLI on the host (installer:
-  `curl -fsSL https://openclaw.ai/install.sh | bash -s -- --no-onboard`), and
+- **Arm C:** the OpenClaw CLI on the host, pinned to the version arm D runs
+  inside NemoClaw (the onboarding output prints it; 2026.9.2 on 2026-11-03):
+  `curl -fsSL https://openclaw.ai/install.sh | bash -s -- --no-onboard --version 2026.9.2 --verify`,
+  and
   the sandbox image `openclaw-sandbox:trixie-slim`, built with the Dockerfile in
   OpenClaw's "Images and setup" page.
 - **Arm D:** an OpenClaw sandbox in NemoClaw named `my-openclaw`, onboarded
@@ -186,7 +188,12 @@ bash harness/batch.sh --round2 --tasks T5,T6,T7 2>&1 | tee harness/logs/r2/stage
 3. Remove arm C's containers: `docker rm -f $(docker ps -aq --filter name=openclaw-sbx-)`.
 4. Arm D, when done with it: `nemoclaw my-openclaw destroy`.
 5. Keep arm A's container and `my-hermes` until the 10-20 teardown (G5).
-6. Revoke the throwaway NVIDIA key at build.nvidia.com.
+6. Onboarding arm D **updated the shared provider `nvidia-prod`**, so
+   `my-hermes` also uses the throwaway key. Before revoking it, re-register the
+   long-term key: export it as `NVIDIA_INFERENCE_API_KEY`, then rerun
+   `nemohermes onboard` for `my-hermes` (NemoClaw: "rerun onboarding with the
+   new value in your environment"). Then revoke the throwaway key at
+   build.nvidia.com.
 7. `colima stop`.
 
 ## 9. Model cost path
