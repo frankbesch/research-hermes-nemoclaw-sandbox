@@ -34,6 +34,13 @@ git fetch origin claude/clever-ptolemy-i7ezr0 && git checkout claude/clever-ptol
 export NEMOCLAW_DISABLE_TELEMETRY=1
 ```
 
+Point `docker` at Colima's socket, the same one the harness uses (`harness/lib.sh`).
+Without it, plain `docker` looks for `/var/run/docker.sock` and fails.
+
+```bash
+export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
+```
+
 ```bash
 mkdir -p harness/workA harness/workC harness/outside harness/logs/r2
 ```
