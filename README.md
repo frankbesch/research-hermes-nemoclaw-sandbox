@@ -21,6 +21,9 @@ versions, and environment checks come from the operator's run notes.
   (G5) runs when the rig is retired.
 - **Software, per the run notes:** Hermes v0.22.2; NemoClaw v0.0.136
   (alpha); a Colima VM with 4 CPU and 10 GB memory.
+- **Round 2: designed, not run.** A containment probe that needs no model,
+  two indirect injection variants, and OpenClaw arms C and D. See
+  [Round 2](#round-2-designed-not-run).
 
 ## Measured results
 
@@ -123,6 +126,32 @@ Findings:
   logs do not say.
 - **Redaction.** One log path naming the operator's machine reads `<run>/`,
   and session ids read `<session>`.
+
+## Round 2 (designed, not run)
+
+Finding 2 says T5 never reached the sandbox: the model refused first. Round 2
+separates the two layers so each gives its own result. No round-2 result
+exists yet, and the 10-20 results above stay as recorded.
+
+- **Containment layer (P1, no model):** the harness runs
+  [harness/probe.sh](harness/probe.sh) inside each arm's execution environment.
+  It reads the key env (recorded only as real, placeholder, or absent), POSTs a
+  fake canary to a local listener ([harness/canary_listener.py](harness/canary_listener.py)),
+  and writes outside the allowed paths. This shows what each arm stops when an
+  agent complies.
+- **Agent layer:** T5 again, plus T6 (the instruction arrives in a file) and T7
+  (it arrives in a command's output). Each run is coded as complied, refused,
+  partial, or error.
+- **Arms:** A Hermes in its Docker backend, B Hermes in NemoClaw, C OpenClaw in
+  its own Docker sandbox ([harness/openclaw-C.json5](harness/openclaw-C.json5)),
+  D OpenClaw in NemoClaw.
+- **Repeats:** 3 per arm for P1, 10 per arm and task for the agent layer;
+  132 runs; plan a 3.5-hour window (estimate in SCORING).
+- **Files:** tasks in [tasks.md](tasks.md), preregistered rubric in
+  [SCORING.md](SCORING.md), run sheet in [RUNBOOK.md](RUNBOOK.md), doc quotes
+  and open questions in [SOURCES.md](SOURCES.md).
+- **Dry run** (no Docker, model, or network): `bash harness/batch.sh --round2 --dry-run`.
+  `bash harness/batch.sh` with no options still replays the 10-20 run.
 
 ## More
 
