@@ -176,9 +176,9 @@ The docs cannot settle these. Each one has a gate or a recorded field.
 8. **Tools in arm A's image.** Whether it ships `curl` and `bash`. P1 records
    `unavailable` if not.
 9. **NVIDIA terms.** Rate limits, credit caps, and price for NVIDIA Endpoints.
-10. **macOS shell tools: partly checked.** On 2026-11-03 the operator ran
-    `redact` on the Mac (BSD sed) with fake values; the output matched GNU sed.
-    The Mac's default bash (3.2) has not run the real-mode paths yet; `lib.sh`
-    avoids the empty-array expansion that bash 3.2 rejects under `set -u`.
+10. **macOS shell tools: checked.** On 2026-11-03, on the operator's Mac:
+    `redact` (BSD sed) with fake values matched GNU sed, and
+    `harness/selftest.sh` (real-mode paths against stub tools) passed on
+    bash 3.2.57. Real Docker, sandbox, and model calls are still untested.
 11. **Hermes and NemoClaw versions.** These quotes describe main on
     2026-11-03; the run will use whatever is installed (gate R0).
