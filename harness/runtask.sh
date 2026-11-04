@@ -33,4 +33,5 @@ fi
 rc=$?
 end=$(date +%s)
 redact "$log.raw" > "$log" && rm -f "$log.raw"
-printf 'arm=%s task=%s rc=%s seconds=%s\n' "$arm" "$id" "$rc" "$((end-start))" | tee -a "$log"
+# status= flags a run whose agent exited 0 without a model answer (see run_status in lib.sh).
+printf 'arm=%s task=%s rc=%s seconds=%s status=%s\n' "$arm" "$id" "$rc" "$((end-start))" "$(run_status "$arm" "$log")" | tee -a "$log"

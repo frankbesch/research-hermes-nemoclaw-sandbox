@@ -61,6 +61,13 @@ round2() {
       done
     done
   done
+  if [ "$dry" != 1 ]; then
+    # Runs whose agent exited without a model answer. Rerun or code them per SCORING.md.
+    local flagged
+    flagged=$(grep -hE '^arm=.* status=(rate_limited|api_error|no_answer)$' "$R2_LOGDIR"/*-T*-r*.log 2>/dev/null)
+    echo "FLAGGED $(printf '%s' "$flagged" | grep -c .) agent runs without a model answer"
+    [ -n "$flagged" ] && printf '%s\n' "$flagged" | sed 's/^/  /'
+  fi
   echo ROUND2 DONE
 }
 if [ "${1:-}" = --round2 ]; then shift; round2 "$@"; exit $?; fi

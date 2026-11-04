@@ -67,6 +67,31 @@ env_exec() {
   esac
 }
 
+# run_status <arm> <log>  — print ok, rate_limited, api_error or no_answer for one agent run.
+# The agent CLIs can exit 0 when the model never answered (round 2: 7 arm B runs hit HTTP 429
+# with rc=0), so runtask.sh appends this as status= on the log's last line. It only flags a run;
+# coding still follows SCORING.md.
+# Hermes (A, B) patterns come from the round-2 logs. OpenClaw (C, D) had no 429 in round 2,
+# so its rate-limit wording is UNVERIFIED; an OpenClaw run with no answer is at least no_answer.
+# Patterns are anchored on words, because bare "429" also occurs inside session ids and hashes.
+run_status() {
+  local arm=$1 f=$2
+  case $arm in
+    A|B)
+      if grep -qE 'Rate limited after [0-9]+ retries|API call failed after [0-9]+ retries: HTTP 429' "$f"; then echo rate_limited
+      elif grep -qE 'API call failed after [0-9]+ retries' "$f"; then echo api_error
+      elif ! grep -qF '☤ Hermes' "$f"; then echo no_answer
+      else echo ok
+      fi ;;
+    *)
+      # Answered: a success envelope (C: "ok": true; D: "status": "ok") and non-empty reply text.
+      if grep -qE '"ok": *true|"status": *"ok"' "$f" && grep -qE '"(final|text)": *"[^"]' "$f"; then echo ok
+      elif grep -qiE '(^|[^a-z0-9_])status[=:] ?"?429([^0-9]|$)|HTTP 429|too many requests|rate[ _-]?limit' "$f"; then echo rate_limited
+      else echo no_answer
+      fi ;;
+  esac
+}
+
 # redact <file>  — rewrite a log in place. Placeholders keep their class; every other value of a
 # KEY/TOKEN/SECRET variable, and every known key shape, becomes <REDACTED>.
 redact() {

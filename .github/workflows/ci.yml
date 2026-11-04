@@ -25,6 +25,8 @@ jobs:
           test "$(echo "$out" | grep -c '^CELL')" = 132
       - name: Round-2 real-mode self-test (stub tools; no Docker, model, or network)
         run: bash harness/selftest.sh
+      - name: Run-status classifier on the round-2 logs
+        run: bash harness/test-status.sh
 
   secret-scan:
     runs-on: ubuntu-latest

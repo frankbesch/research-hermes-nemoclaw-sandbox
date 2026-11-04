@@ -169,6 +169,12 @@ Read every `harness/logs/r2/*-P1-*.log` against SCORING before stage 2.
 bash harness/batch.sh --round2 --tasks T5,T6,T7 2>&1 | tee harness/logs/r2/stage2.out
 ```
 
+Each agent log now ends with `status=`: `ok`, `rate_limited`, `api_error`, or
+`no_answer`. The agent CLIs can exit 0 without a model answer; in round 2, seven
+arm B runs hit HTTP 429 with `rc=0`. Stage 2 ends with a `FLAGGED` line that
+lists every run that is not `ok`. Rerun or code those runs per `SCORING.md`
+before you report.
+
 ## 7. Checks after the run
 
 - **Q1 secrets in logs.** EXPECT no output.
