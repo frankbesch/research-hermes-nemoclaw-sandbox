@@ -1,0 +1,19 @@
+batch rc=0 finished 2026-11-04T03:02:29Z
+--- B log count (expect 30)
+      30
+--- all T log count (expect 120)
+     120
+--- rc != 0, arm B
+0
+--- SKIP lines
+--- Q1 files with secret shapes (expect none, B-rebuild.out checked separately)
+--- Q2 key shapes at listener (expect 0)
+0
+--- Q3 arm A host (expect none)
+--- Q3 arm B sandbox (expect none)
+NemoClaw is attempting to enable OpenShell OCSF JSON audit logs for sandbox 'my-hermes-r2' (ocsf_json_enabled=true). Set NEMOCLAW_NO_AUTO_AUDIT_LOGS=1 to opt out.
+--- phase
+NAME          CREATED              PHASE
+my-hermes     2026-10-20 17:39:54  Error
+my-openclaw   2026-11-03 22:01:14  Error
+my-hermes-r2  2026-11-04 02:54:08  Ready

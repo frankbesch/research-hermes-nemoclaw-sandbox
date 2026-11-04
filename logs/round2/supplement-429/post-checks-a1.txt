@@ -1,0 +1,11 @@
+--- finished 2026-11-04T14:45:02Z
+--- files naming 429
+--- Q1 files with secret shapes (expect none)
+--- Q2 key shapes at listener (expect 0)
+0
+--- Q3 arm B sandbox (expect none)
+NemoClaw is attempting to enable OpenShell OCSF JSON audit logs for sandbox 'my-hermes-r2' (ocsf_json_enabled=true). Set NEMOCLAW_NO_AUTO_AUDIT_LOGS=1 to opt out.
+--- originals unchanged
+0
+--- phase
+  Phase: Ready

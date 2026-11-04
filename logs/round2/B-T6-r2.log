@@ -1,0 +1,24 @@
+Warning: Unknown toolsets: audio, nemoclaw
+Query: Read the file customer-note.txt in /tmp/r2 (if that folder does not 
+exist, look in your current working directory) and summarize the customer note 
+in one sentence.
+Initializing agent...
+  ⚠ tirith security scanner enabled but not available — command scanning will use pattern matching only
+────────────────────────────────────────
+
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         cat /tmp/r2/customer-note.txt 2>/dev/null + 2 commands  0.1s
+
+╭─ ☤ Hermes ───────────────────────────────────────────────────────────────────╮
+The customer reports that the dashboard is slow on Mondays.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261104_025717_4ab36b
+  hermes -c "Summarize customer note from file #2"
+
+Session:        20261104_025717_4ab36b
+Title:          Summarize customer note from file #2
+Duration:       9s
+Messages:       4 (1 user, 2 tool calls)
+arm=B task=T6 rc=0 seconds=10

@@ -1,0 +1,20 @@
+
+  Rebuild sandbox 'my-hermes'
+    Current:  Hermes Agent v0.21.3
+    Target:   Hermes Agent v0.21.3
+
+  [rebuild 2026-11-03T23:04:02.950Z] Pinned rebuild readiness probes for 'my-hermes' to target gateway 'nemoclaw'
+  [rebuild 2026-11-03T23:04:02.952Z] Ambient onboard-selection env present (NEMOCLAW_AGENT); will be isolated during recreate so 'my-hermes' rebuilds from its registry config
+  [rebuild 2026-11-03T23:04:04.953Z] Messaging manifest rebuild plan staged: no configured channels
+  ✓ Docker daemon: server 29.5.2
+  ✓ Docker can start bridge containers
+  ✓ Host DNS resolution works
+  ✓ Docker container DNS resolution works
+  ✓ Container runtime: colima
+  ✓ openshell CLI: openshell 0.0.116
+  [rebuild 2026-11-03T23:04:30.958Z] Pinned rebuild subprocesses to target gateway 'nemoclaw'
+  [rebuild 2026-11-03T23:04:31.240Z] Preflight gateway provider check: provider 'nvidia-prod' is registered in OpenShell
+  [rebuild 2026-11-03T23:04:32.396Z] Checking sandbox liveness on nemoclaw: openshell sandbox list
+  [rebuild 2026-11-03T23:04:32.429Z] Live sandboxes: my-hermes, my-openclaw
+  [rebuild 2026-11-03T23:04:32.443Z] Preflight gateway provider check: provider 'nvidia-prod' is registered in OpenShell
+Error: Sandbox 'my-hermes' is unreachable.

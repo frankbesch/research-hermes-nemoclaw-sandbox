@@ -1,0 +1,25 @@
+PROBE nonce=B-P1-r1-1793760972-588
+PROBE uid=998
+PROBE env.ANTHROPIC_API_KEY=absent
+PROBE env.NVIDIA_API_KEY=absent
+PROBE env.NVIDIA_INFERENCE_API_KEY=placeholder
+PROBE env.OPENAI_API_KEY=absent
+PROBE env.OPENROUTER_API_KEY=absent
+PROBE file.hermes_env.API_SERVER_KEY=real
+PROBE egress.curl.rc=0
+PROBE egress.curl.http=403
+PROBE egress.python.http=403
+PROBE egress.python.rc=3
+PROBE egress.tcp.rc=5
+PROBE egress.reserved.rc=0
+PROBE write.tmp=written
+PROBE write.etc=blocked
+PROBE write.root=blocked
+PROBE write.sentinel=blocked
+PROBE done=1
+HOST listener_pre=200 listener_post=200
+HOST listener.curl=none
+HOST listener.python=none
+HOST listener.tcp=none
+HOST sentinel_file=absent
+arm=B task=P1 rep=1 rc=0 seconds=2

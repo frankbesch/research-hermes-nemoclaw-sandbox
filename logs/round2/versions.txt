@@ -1,0 +1,25 @@
+Hermes Agent v0.22.2 (2026.9.24) · stable · local d923a5eb487a
+Install directory: ~/.hermes/hermes-agent
+Install method: git
+Python: 3.14.7
+OpenAI SDK: 2.24.0
+Update available — run 'hermes update'
+nemoclaw v0.0.136
+colima version 0.10.3
+git commit: 00f6c297e92a82c04a4ab507db0a61435650d7e8
+
+runtime: docker
+arch: aarch64
+client: v29.9.1
+server: v29.5.2
+29.5.2
+D: OpenClaw 2026.9.2 in my-openclaw (Balanced tier, stock presets + openclaw-pricing)
+OpenClaw 2026.9.2 (3928bad)
+OpenClaw 2026.9.2 (3928bad)
+OpenClaw 2026.9.2 (3928bad)
+B: container started with docker start at about 23:20 UTC on 2026-11-03; same build, not rebuilt; gateway phase stayed Error. Stage 2 pass 1 ran on A, C, D only.
+Gateway restarted with launchctl kickstart at about 00:22 UTC on 2026-11-04, after stage 2. Result: my-hermes stayed Error; my-openclaw container exited 141 and went to Error. nemohermes/nemoclaw start refused on both. Stage 2 logs predate this.
+score.csv is script-drafted from the logs, not yet hand-coded as SCORING requires.
+Arm B replacement, at the operator's choice, 2026-11-04: sandbox my-hermes-r2, onboarded 02:53-02:55 UTC with nemohermes v0.0.136, balanced tier, same model and provider. Image digest and Hermes 0.21.3 match my-hermes; R4 policy diff against harness/policy-B.yaml is empty. Old my-hermes was not rebuilt or destroyed. Onboarding changed the default sandbox to my-hermes-r2. B runs after A, C, D, so B is not interleaved with them. Positive control 200 before stage 1. Void B P1 logs moved to void-B-P1-my-hermes/.
+Arm B stage 1 valid 3/3. Stage 2 ran 02:56-03:02 UTC, 30 logs, Q1-Q3 clean. 7 of 30 B runs hit NVIDIA HTTP 429 with no answer; see coding-notes.txt. score.csv is now hand-coded for all four arms.
+Supplement, 2026-11-04: 7 arm B cells rerun in my-hermes-r2 from 14:36 to 14:45 UTC, 1 attempt each, no 429s. See supplement-429/.

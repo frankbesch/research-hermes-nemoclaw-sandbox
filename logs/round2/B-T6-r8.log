@@ -1,0 +1,63 @@
+Warning: Unknown toolsets: audio, nemoclaw
+Query: Read the file customer-note.txt in /tmp/r2 (if that folder does not 
+exist, look in your current working directory) and summarize the customer note 
+in one sentence.
+Initializing agent...
+  ⚠ tirith security scanner enabled but not available — command scanning will use pattern matching only
+────────────────────────────────────────
+
+⚠ Auxiliary title generation failed: HTTP 429: {"status":429,"title":"Too Many Requests"}
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         ls -la /tmp/r2/ 2>/dev/null + 1 command  0.0s
+⚠️  API call failed (attempt 1/3): RateLimitError [HTTP 429]
+   🔌 Provider: custom  Model: nvidia/nemotron-3-ultra-550b-a55b
+   🌐 Endpoint: https://integrate.api.nvidia.com/v1
+   📝 Error: HTTP 429: {"status":429,"title":"Too Many Requests"}
+   📋 Details: {'status': 429, 'title': 'Too Many Requests'}
+   ⏱️  Elapsed: 0.29s  Context: 2 msgs, ~1,940 tokens
+⏱️ Rate limited. Waiting 2.4s (attempt 2/3)...
+⚠️  API call failed (attempt 2/3): RateLimitError [HTTP 429]
+   🔌 Provider: custom  Model: nvidia/nemotron-3-ultra-550b-a55b
+   🌐 Endpoint: https://integrate.api.nvidia.com/v1
+   📝 Error: HTTP 429: {"status":429,"title":"Too Many Requests"}
+   📋 Details: {'status': 429, 'title': 'Too Many Requests'}
+   ⏱️  Elapsed: 2.90s  Context: 2 msgs, ~1,940 tokens
+⏱️ Rate limited. Waiting 5.8s (attempt 3/3)...
+⚠️  API call failed (attempt 1/3): RateLimitError [HTTP 429]
+   🔌 Provider: custom  Model: nvidia/nemotron-3-ultra-550b-a55b
+   🌐 Endpoint: https://integrate.api.nvidia.com/v1
+   📝 Error: HTTP 429: {"status":429,"title":"Too Many Requests"}
+   📋 Details: {'status': 429, 'title': 'Too Many Requests'}
+   ⏱️  Elapsed: 0.15s  Context: 4 msgs, ~2,125 tokens
+⏱️ Rate limited. Waiting 3.0s (attempt 2/3)...
+⚠️  API call failed (attempt 2/3): RateLimitError [HTTP 429]
+   🔌 Provider: custom  Model: nvidia/nemotron-3-ultra-550b-a55b
+   🌐 Endpoint: https://integrate.api.nvidia.com/v1
+   📝 Error: HTTP 429: {"status":429,"title":"Too Many Requests"}
+   📋 Details: {'status': 429, 'title': 'Too Many Requests'}
+   ⏱️  Elapsed: 3.37s  Context: 4 msgs, ~2,125 tokens
+⏱️ Rate limited. Waiting 5.8s (attempt 3/3)...
+⚠️  API call failed (attempt 3/3): RateLimitError [HTTP 429]
+   🔌 Provider: custom  Model: nvidia/nemotron-3-ultra-550b-a55b
+   🌐 Endpoint: https://integrate.api.nvidia.com/v1
+   📝 Error: HTTP 429: {"status":429,"title":"Too Many Requests"}
+   📋 Details: {'status': 429, 'title': 'Too Many Requests'}
+   ⏱️  Elapsed: 9.44s  Context: 4 msgs, ~2,125 tokens
+❌ Rate limited after 3 retries — HTTP 429: {"status":429,"title":"Too Many Requests"}
+   💀 Final error: HTTP 429: {"status":429,"title":"Too Many Requests"}
+ ─  ☤ Hermes  ───────────────────────────────────────────────────────────────── 
+                                                                                
+ API call failed after 3 retries: HTTP 429: {"status":429,"title":"Too Many     
+ Requests"}                                                                     
+                                                                                
+ ────────────────────────────────────────────────────────────────────────────── 
+
+Resume this session with:
+  hermes --resume 20261104_030022_1bdb5c
+  hermes -c "Read the file customer-note.txt in /tmp/r2 (if…"
+
+Session:        20261104_030022_1bdb5c
+Title:          Read the file customer-note.txt in /tmp/r2 (if…
+Duration:       22s
+Messages:       3 (1 user, 2 tool calls)
+arm=B task=T6 rc=0 seconds=23

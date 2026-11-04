@@ -1,0 +1,174 @@
+  [non-interactive] Agent: Hermes Agent
+
+  NemoHermes Onboarding
+  (non-interactive mode)
+  ===================
+
+  [1/8] Preflight checks
+  ──────────────────────────────────────────────────
+  ✓ Docker daemon: server 29.5.2
+  ✓ Docker can start bridge containers
+  ✓ Host DNS resolution works
+  ✓ Docker container DNS resolution works
+  ✓ Container runtime: colima
+  ✓ Container runtime resources: 4 vCPU / 9.7 GiB
+  ✓ openshell CLI: openshell 0.0.116
+  ✓ Port 8080 already owned by healthy NemoHermes runtime (OpenShell gateway)
+  ✓ Apple GPU detected: Apple M4 (10 cores), 24576 MB unified memory
+  ⓘ Local NIM unavailable — requires NVIDIA GPU
+  ⓘ Sandbox GPU: disabled (no NVIDIA GPU detected)
+
+  [2/8] Starting OpenShell gateway
+  ──────────────────────────────────────────────────
+  [reuse] Skipping gateway (running)
+  Reusing healthy NemoClaw gateway.
+
+  [3/8] Configuring inference provider
+  ──────────────────────────────────────────────────
+  [non-interactive] Provider: build
+  Chat Completions API available — Hermes will use openai-completions.
+  Using NVIDIA Endpoints with model: nvidia/nemotron-3-ultra-550b-a55b
+
+  ──────────────────────────────────────────────────
+  Review configuration
+  ──────────────────────────────────────────────────
+  Provider:      nvidia-prod
+  Model:         nvidia/nemotron-3-ultra-550b-a55b
+  API key:       configured for OpenShell gateway registration
+  Web search:    disabled
+  Managed tools: none
+  Messaging:     none
+  Sandbox name:  my-hermes-r2
+  Note:          Sandbox build typically takes 5–15 minutes on this host.
+  ──────────────────────────────────────────────────
+  Web search and messaging channels will be prompted next.
+
+  [4/8] Setting up inference provider
+  ──────────────────────────────────────────────────
+{
+  "scope": "global",
+  "settings": {
+    "agent_policy_proposals_enabled": "<unset>",
+    "ocsf_json_enabled": "<unset>",
+    "proposal_approval_mode": "<unset>",
+    "providers_v2_enabled": "true"
+  },
+  "settings_revision": 1
+}
+[1m[32m✓[39m[0m Updated provider nemoclaw-nvidia-prod-v1
+  ✓ Inference smoke passed: nvidia-prod / nvidia/nemotron-3-ultra-550b-a55b
+  ✓ Native NVIDIA provider ready: nvidia-prod / nvidia/nemotron-3-ultra-550b-a55b
+
+  [5/8] Messaging channels
+  ──────────────────────────────────────────────────
+  [non-interactive] No complete messaging channel inputs configured. Skipping.
+
+  [6/8] Creating sandbox
+  ──────────────────────────────────────────────────
+  ! Port 18789 is taken. Using port 18791 instead.
+  Registry entry exists for 'my-hermes-r2' but installer restore flag not set — skipping pre-upgrade backup select.
+  ! Port 8642 is taken. Using port 8643 instead.
+  Creating sandbox 'my-hermes-r2' (this takes a few minutes on first run)...
+[1m[32m✓[39m[0m Updated provider nemoclaw-nvidia-prod-v1
+  Building sandbox image...
+  Applying managed startup profile to the verified sandbox...
+  ✓ Applied the managed startup profile
+  Committing managed startup shared state...
+  ✓ Committed managed startup shared state
+  ✓ Released the managed startup hold
+  ✓ Revalidated the managed startup sandbox identity
+  Waiting for sandbox to become ready...
+  ✓ Sandbox 'my-hermes-r2' created
+  Obsolete sandbox image retirement skipped: no-owned-image
+
+  [7/8] Setting up Hermes Agent inside sandbox
+  ──────────────────────────────────────────────────
+  Waiting for Hermes Agent gateway (up to 90s)...
+  ⏳ Still working on Agent setup… (34s elapsed)
+  ✓ Hermes Agent gateway is healthy
+
+  [8/8] Policy presets
+  ──────────────────────────────────────────────────
+  [non-interactive] Policy tier: balanced
+  [non-interactive] Applying policy presets: npm, pypi, huggingface, brew-balanced
+  Effective egress that would be opened:
+    policy 'npm_yarn':
+      - registry.npmjs.org:443 (access: full, tls: skip)
+      - registry.yarnpkg.com:443 (access: full, tls: skip)
+      binaries:
+        - /usr/local/bin/npm*
+        - /usr/local/bin/npx*
+        - /usr/local/bin/node*
+        - /usr/local/bin/yarn*
+        - /usr/bin/npm*
+        - /usr/bin/node*
+  Effective egress that would be opened:
+    policy 'huggingface':
+      - huggingface.co:443 (protocol: rest, enforcement: enforce)
+          allow: GET  /**
+      - cdn-lfs.huggingface.co:443 (protocol: rest, enforcement: enforce)
+          allow: GET  /**
+      - router.huggingface.co:443 (protocol: rest, enforcement: enforce)
+          allow: GET  /**
+          allow: POST  /**
+      binaries:
+        - /usr/local/bin/python3
+        - /usr/local/bin/node
+  Effective egress that would be opened:
+    policy 'brew-balanced':
+      - formulae.brew.sh:443 (access: full, tls: skip)
+      - github.com:443 (access: full)
+      - ghcr.io:443 (access: full, tls: skip)
+      - pkg-containers.githubusercontent.com:443 (access: full, tls: skip)
+      - objects.githubusercontent.com:443 (access: full, tls: skip)
+      - raw.githubusercontent.com:443 (protocol: rest, enforcement: enforce)
+          allow: GET  /**
+          allow: HEAD  /**
+      binaries:
+        - /usr/bin/curl
+        - /usr/local/bin/brew
+        - /home/linuxbrew/.linuxbrew/bin/brew
+        - /home/linuxbrew/.linuxbrew/bin/*
+        - /home/linuxbrew/.linuxbrew/Homebrew/bin/*
+  Applied preset: npm
+  Applied preset: huggingface
+  Applied preset: brew-balanced
+  [32m✓[0m Deployment verified — gateway, dashboard, and inference route are healthy.
+
+  ──────────────────────────────────────────────────
+  Hermes is ready
+
+  Sandbox:  my-hermes-r2
+  Model:    nvidia/nemotron-3-ultra-550b-a55b (NVIDIA Endpoints)
+
+  Access
+
+  Hermes Agent Dashboard
+  Port 18791 must be forwarded before opening this URL.
+  http://127.0.0.1:18791/
+
+  OpenAI-compatible API (bearer auth)
+  Port 8642 must be forwarded; clients send an Authorization header:
+    Authorization: Bearer <API key>
+  Get the key: nemohermes my-hermes-r2 gateway-token --quiet
+
+  Hermes Agent OpenAI-compatible API
+  Port 8643 must be forwarded before connecting.
+  http://127.0.0.1:8643/v1
+
+  Terminal:
+    nemohermes launch my-hermes-r2
+
+    Or open a sandbox shell first:
+      nemohermes my-hermes-r2 connect
+      then run the configured interactive agent command
+
+  Manage later
+
+    Status:      nemohermes my-hermes-r2 status
+    Logs:        nemohermes my-hermes-r2 logs --follow
+    Model:       nemohermes inference set --model <model> --provider <provider> --sandbox my-hermes-r2
+    Policies:    nemohermes my-hermes-r2 policy add
+    Credentials: nemohermes credentials reset <PROVIDER> && nemohermes onboard
+  ──────────────────────────────────────────────────
+

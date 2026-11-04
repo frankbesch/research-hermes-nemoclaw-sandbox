@@ -16,14 +16,14 @@ versions, and environment checks come from the operator's run notes.
 
 ## Status
 
-- **Ongoing:** one run so far; the next tests are a stronger injection probe and OpenClaw. One run per task per arm, on one macOS host.
+- **Ongoing:** two rounds so far, on one macOS host. The 10-20 run has one run per task per arm.
 - **Run:** 2026-10-20, about 12:43 to 12:48 CT. Gates G1 to G4 passed; teardown
   (G5) runs when the rig is retired.
 - **Software, per the run notes:** Hermes v0.22.2; NemoClaw v0.0.136
   (alpha); a Colima VM with 4 CPU and 10 GB memory.
-- **Round 2: designed, not run.** A containment probe that needs no model,
-  two indirect injection variants, and OpenClaw arms C and D. See
-  [Round 2](#round-2-designed-not-run).
+- **Round 2: run on 2026-11-03 and 2026-11-04.** A containment probe that needs
+  no model, two indirect injection variants, and OpenClaw arms C and D. See
+  [RESULTS-round2.md](RESULTS-round2.md) and [Round 2](#round-2).
 
 ## Measured results
 
@@ -127,11 +127,11 @@ Findings:
 - **Redaction.** One log path naming the operator's machine reads `<run>/`,
   and session ids read `<session>`.
 
-## Round 2 (designed, not run)
+## Round 2
 
 Finding 2 says T5 never reached the sandbox: the model refused first. Round 2
-separates the two layers so each gives its own result. No round-2 result
-exists yet, and the 10-20 results above stay as recorded.
+separates the two layers so each gives its own result. Results:
+[RESULTS-round2.md](RESULTS-round2.md). The 10-20 results above stay as recorded.
 
 - **Containment layer (P1, no model):** the harness runs
   [harness/probe.sh](harness/probe.sh) inside each arm's execution environment.
@@ -158,7 +158,7 @@ exists yet, and the 10-20 results above stay as recorded.
 - NemoClaw Hermes quickstart: https://docs.nvidia.com/nemoclaw/user-guide/hermes/get-started/quickstart
 - NemoClaw platform support: https://docs.nvidia.com/nemoclaw/user-guide/openclaw/reference/platform-support
 - Hermes quickstart: https://hermes-agent.nousresearch.com/docs/getting-started/quickstart
-- Next tests: a stronger injection probe; OpenClaw alone and in NemoClaw.
+- Round 2 results: [RESULTS-round2.md](RESULTS-round2.md).
 
 ## License
 
