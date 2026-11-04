@@ -1,8 +1,14 @@
-# Round 2 runbook (designed, not run)
+# Round 2 runbook
 
 One sheet for running round 2 on the operator's Mac (Apple Silicon, Colima).
 Tasks: [tasks.md](tasks.md). Rules: [SCORING.md](SCORING.md). Doc quotes and
-open questions: [SOURCES.md](SOURCES.md). Nothing here has run yet.
+open questions: [SOURCES.md](SOURCES.md).
+
+Round 2 ran on 2026-11-03 and 2026-11-04. Results:
+[RESULTS-round2.md](RESULTS-round2.md). Arm B ran in a replacement sandbox,
+`my-hermes-r2`, as SCORING's amendments record. To repeat that setup, run
+`export B_SANDBOX=my-hermes-r2` and use that name wherever an arm B command below
+says `my-hermes`.
 
 ## 1. Prerequisites
 
@@ -192,21 +198,36 @@ bash harness/batch.sh --round2 --tasks T5,T6,T7 2>&1 | tee harness/logs/r2/stage
 
 ## 8. Teardown
 
-1. Stop the listener (Ctrl-C in its terminal).
+Run these in order. Revoke the throwaway key only at step 8, after steps 6 and 7.
+
+1. Stop the listener (Ctrl-C in its terminal), and close any `hermes chat`
+   warm-up that is still open.
 2. Remove the probe folders: `rm -rf harness/outside harness/workC`.
 3. Remove arm C's containers: `docker rm -f $(docker ps -aq --filter name=openclaw-sbx-)`.
-4. Arm D, when done with it: `nemoclaw my-openclaw destroy`.
+4. Remove the round's NemoClaw sandboxes:
+   - Arm D, when done with it: `nemoclaw my-openclaw destroy`.
+   - Replacement arm B, when done with it: `nemohermes my-hermes-r2 destroy`.
+   - Then point the default back: `nemohermes use my-hermes`. On 2026-11-04 the
+     default was `my-hermes-r2`.
+   - An unattended destroy of the last sandbox on macOS also tears down the shared
+     gateway. Add `--no-cleanup-gateway` if a later step still needs it.
 5. Keep arm A's container and `my-hermes` until the 10-20 teardown (G5).
-6. Onboarding arm D **updated the shared provider `nvidia-prod`**, so
-   `my-hermes` also uses the throwaway key. Before revoking it, re-register the
+6. If arm A's key was swapped into `~/.hermes/.env` for this round, restore
+   the backup made before the swap (on 2026-11-03:
+   `~/.hermes/.env.pre-r2.bak`).
+7. Onboarding arm D **updated the shared provider `nvidia-prod`**, and
+   `my-hermes-r2` was onboarded with the same throwaway key, so `my-hermes` also
+   uses the throwaway key. Re-register the
    long-term key: export it as `NVIDIA_INFERENCE_API_KEY`, then rerun
    `nemohermes onboard` for `my-hermes` (NemoClaw: "rerun onboarding with the
-   new value in your environment"). Then revoke the throwaway key at
-   build.nvidia.com.
-7. If arm A's key was swapped into `~/.hermes/.env` for this round, restore
-   the backup made before the swap (on 2026-11-03:
-   `~/.hermes/.env.pre-r2.bak`) before revoking the throwaway key.
-8. `colima stop`.
+   new value in your environment"). The CLI's own path to change a credential is
+   `nemohermes credentials reset nvidia-prod`, then onboard.
+   - **Check first:** on 2026-11-04 `my-hermes` was in phase `Error`, and
+     `nemohermes` start refused it. Whether onboarding repairs it is
+     **UNVERIFIED**. `--recreate-sandbox` deletes the existing sandbox, so don't
+     add it unless you mean to lose that sandbox's state.
+8. Revoke the throwaway key at build.nvidia.com.
+9. `colima stop`.
 
 ## 9. Model cost path
 
