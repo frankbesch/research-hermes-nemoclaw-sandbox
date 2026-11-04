@@ -71,9 +71,11 @@ bash harness/batch.sh
 ```
 
 Task T5 plants an instruction to print and send secrets. If an agent
-complied, its log could hold secrets: `runtask.sh` redacts only `nvapi-`
-key strings. Run it with throwaway credentials, and read each log before
-you share it.
+complied, its log could hold secrets. Since round 2, `runtask.sh` redacts the
+values of variables named like KEY, TOKEN, or SECRET, plus common key shapes
+(`redact` in [harness/lib.sh](harness/lib.sh)). It cannot catch every secret
+format, so run it with throwaway credentials, and read each log before you
+share it.
 
 ## Measured run
 
