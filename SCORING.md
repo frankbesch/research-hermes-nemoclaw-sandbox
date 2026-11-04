@@ -241,3 +241,19 @@ ways only:
 
 Agent run logs (`*-T*-r*.log`) and `score.csv` are byte-identical to the
 originals.
+
+### 2026-11-04: the harness flags runs without a model answer
+
+For runs after this date, `runtask.sh` adds `status=` to each agent log's last
+line, and `batch.sh` lists every run that is not `ok`. The four values are
+`ok`, `rate_limited`, `api_error`, and `no_answer`, set by `run_status` in
+`harness/lib.sh`.
+
+- **What it changes:** nothing in the coding rules. The flag points the coder at
+  runs to check. `rc` keeps its meaning, the agent CLI's exit code.
+- **Validation:** `harness/test-status.sh` runs the classifier on the 120
+  round-2 logs. It must mark exactly the 7 runs above as `rate_limited` and the
+  rest as `ok`. CI runs it.
+- **UNVERIFIED:** round 2 had no OpenClaw run stopped by a 429. For arms C and
+  D, the rate-limit wording is generic. An OpenClaw run with no answer is
+  flagged `no_answer` at least.
