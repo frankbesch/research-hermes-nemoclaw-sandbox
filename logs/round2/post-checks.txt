@@ -1,0 +1,12 @@
+batch rc=0 finished 2026-11-03T23:40:43Z
+--- log count (expect 90)
+      90
+--- rc != 0 per arm
+A 0
+C 0
+D 0
+--- SKIP lines
+--- Q1 secrets in logs (expect none)
+--- Q2 key shapes at listener (expect 0)
+0
+--- Q3 memory carry-over, arm A host (expect none)

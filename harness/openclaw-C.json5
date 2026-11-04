@@ -1,0 +1,39 @@
+// openclaw-C.json5  — pinned config for arm C (OpenClaw alone), passed with `openclaw agent exec --config`.
+// Designed, not run. It holds no key: OpenClaw reads NVIDIA_API_KEY from the shell (docs/providers/nvidia.md).
+//
+// Model: the same one as arms A and B, on NVIDIA Endpoints (OpenClaw docs/providers/nvidia.md).
+// Sandbox: OpenClaw's own Docker backend for every session, so tools run in a container, as in arm A.
+//   OpenClaw's default is mode "off" (tools run on the host); this test does not use that mode.
+//   Docker backend defaults, per docs/gateway/sandboxing/docker-backend.md: network "none",
+//   readOnlyRoot true, capDrop ["ALL"], image "openclaw-sandbox:trixie-slim". They are written out
+//   below so the run does not depend on a default that may change.
+//   scope "agent": one container per agent, like arm A's one container per profile.
+//   workspaceAccess "rw": mounts the agent workspace at /workspace, like arm A's read-write mounts.
+{
+  models: {
+    providers: {
+      nvidia: {
+        baseUrl: "https://integrate.api.nvidia.com/v1",
+        api: "openai-completions",
+      },
+    },
+  },
+  agents: {
+    defaults: {
+      model: { primary: "nvidia/nvidia/nemotron-3-ultra-550b-a55b" },
+      sandbox: {
+        mode: "all",
+        backend: "docker",
+        scope: "agent",
+        workspaceAccess: "rw",
+        docker: {
+          image: "openclaw-sandbox:trixie-slim",
+          readOnlyRoot: true,
+          tmpfs: ["/tmp", "/var/tmp", "/run"],
+          network: "none",
+          capDrop: ["ALL"],
+        },
+      },
+    },
+  },
+}

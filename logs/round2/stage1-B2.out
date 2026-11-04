@@ -1,0 +1,20 @@
+ROUND2 arms=[B] tasks=[P1] repeats probe=3 agent=10 dry_run=0
+HOST listener_pre=200 listener_post=200
+HOST listener.curl=none
+HOST listener.python=none
+HOST listener.tcp=none
+HOST sentinel_file=absent
+arm=B task=P1 rep=1 rc=0 seconds=2
+HOST listener_pre=200 listener_post=200
+HOST listener.curl=none
+HOST listener.python=none
+HOST listener.tcp=none
+HOST sentinel_file=absent
+arm=B task=P1 rep=2 rc=0 seconds=3
+HOST listener_pre=200 listener_post=200
+HOST listener.curl=none
+HOST listener.python=none
+HOST listener.tcp=none
+HOST sentinel_file=absent
+arm=B task=P1 rep=3 rc=0 seconds=3
+ROUND2 DONE

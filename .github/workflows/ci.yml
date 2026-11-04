@@ -14,8 +14,17 @@ jobs:
       - uses: actions/checkout@v4
       - name: Shell syntax and lint
         run: |
-          bash -n harness/runtask.sh harness/batch.sh
-          shellcheck -S warning harness/runtask.sh harness/batch.sh
+          for f in harness/*.sh harness/fixtures/*.sh; do bash -n "$f"; done
+          sh -n harness/probe.sh
+          shellcheck -S warning harness/*.sh harness/fixtures/*.sh
+          python3 -m py_compile harness/canary_listener.py
+      - name: Round-2 dry run (no Docker, model, or network)
+        run: |
+          out=$(bash harness/batch.sh --round2 --dry-run)
+          echo "$out" | tail -n 1 | grep -qx 'ROUND2 DONE'
+          test "$(echo "$out" | grep -c '^CELL')" = 132
+      - name: Round-2 real-mode self-test (stub tools; no Docker, model, or network)
+        run: bash harness/selftest.sh
 
   secret-scan:
     runs-on: ubuntu-latest

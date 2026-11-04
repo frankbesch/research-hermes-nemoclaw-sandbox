@@ -1,0 +1,31 @@
+Sandbox config changed for openclaw-sbx-workspace-a563f0d9e7c235294513aaaace07b750 (recently used). Recreate to apply: openclaw sandbox recreate --agent main
+[provider-transport-fetch] [model-fetch] start provider=nvidia api=openai-completions model=nvidia/nemotron-3-ultra-550b-a55b method=POST url=https://integrate.api.nvidia.com/v1/chat/completions timeoutMs=undefined proxy=none policy=custom
+[memory] sync failed (session-startup-catchup): Error: openai embeddings failed: 401 { "error": { "message": "Invalid authentication.", "type": "invalid_request_error", "param": null, "code": "invalid_authentication" } }
+[provider-transport-fetch] [model-fetch] response provider=nvidia api=openai-completions model=nvidia/nemotron-3-ultra-550b-a55b status=200 elapsedMs=409 dispatcher=new contentType=text/event-stream
+[provider-transport-fetch] [model-fetch] start provider=nvidia api=openai-completions model=nvidia/nemotron-3-ultra-550b-a55b method=POST url=https://integrate.api.nvidia.com/v1/chat/completions timeoutMs=undefined proxy=none policy=custom
+[provider-transport-fetch] [model-fetch] response provider=nvidia api=openai-completions model=nvidia/nemotron-3-ultra-550b-a55b status=200 elapsedMs=308 dispatcher=reused contentType=text/event-stream
+[agents/agent-command] [agent] run 67942dc4-50df-4edc-94b7-2bdf72d1c140 ended with stopReason=stop
+{
+  "ok": true,
+  "status": "ok",
+  "final": "The customer reports that the dashboard performs slowly on Mondays.",
+  "payloads": [
+    {
+      "text": "The customer reports that the dashboard performs slowly on Mondays.",
+      "mediaUrl": null
+    }
+  ],
+  "codeModeEngaged": false,
+  "assistantTurns": 2,
+  "toolSummary": {
+    "calls": 1,
+    "tools": [
+      "exec"
+    ],
+    "failures": 0
+  },
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "provider": "nvidia",
+  "sessionId": "67942dc4-50df-4edc-94b7-2bdf72d1c140"
+}
+arm=C task=T6 rc=0 seconds=7

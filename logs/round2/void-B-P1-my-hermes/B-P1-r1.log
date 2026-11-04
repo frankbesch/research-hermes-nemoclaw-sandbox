@@ -1,0 +1,10 @@
+Error:   × sandbox 'my-hermes' is not ready (phase: Error); wait for it to reach
+  │ Ready state
+
+NemoClaw is attempting to enable OpenShell OCSF JSON audit logs for sandbox 'my-hermes' (ocsf_json_enabled=true). Set NEMOCLAW_NO_AUTO_AUDIT_LOGS=1 to opt out.
+HOST listener_pre=200 listener_post=200
+HOST listener.curl=none
+HOST listener.python=none
+HOST listener.tcp=none
+HOST sentinel_file=absent
+arm=B task=P1 rep=1 rc=1 seconds=2
