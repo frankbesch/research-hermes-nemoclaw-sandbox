@@ -223,16 +223,35 @@ Run these in order. Revoke the throwaway key only at step 8, after steps 6 and 7
    `~/.hermes/.env.pre-r2.bak`).
 7. Onboarding arm D **updated the shared provider `nvidia-prod`**, and
    `my-hermes-r2` was onboarded with the same throwaway key, so `my-hermes` also
-   uses the throwaway key. Re-register the
-   long-term key: export it as `NVIDIA_INFERENCE_API_KEY`, then rerun
-   `nemohermes onboard` for `my-hermes` (NemoClaw: "rerun onboarding with the
-   new value in your environment"). The CLI's own path to change a credential is
+   uses the throwaway key. Re-register a working key: export it as
+   `NVIDIA_INFERENCE_API_KEY`, then rerun `nemohermes onboard` for `my-hermes`
+   (NemoClaw: "rerun onboarding with the new value in your environment"). The
+   CLI's own path to change a credential is
    `nemohermes credentials reset nvidia-prod`, then onboard.
-   - **Check first:** on 2026-11-04 `my-hermes` was in phase `Error`, and
-     `nemohermes` start refused it. Whether onboarding repairs it is
-     **UNVERIFIED**. `--recreate-sandbox` deletes the existing sandbox, so don't
-     add it unless you mean to lose that sandbox's state.
-8. Revoke the throwaway key at build.nvidia.com.
+   - **Test the key first.** Onboarding validates the key before it reaches the
+     sandbox step. On 2026-11-04 the restored long-term key got HTTP 403 there,
+     and onboarding stopped. The cause is unverified. The run below used a
+     different key.
+   - **Check the sandbox's phase.** On 2026-11-04 `my-hermes` was in phase
+     `Error`, and `nemohermes` start refused it. In the v0.0.136 source, onboarding
+     doesn't repair a sandbox that isn't ready. A non-interactive run exits and
+     names `--recreate-sandbox`. An interactive run asks whether to delete the
+     sandbox and create a new one. `--recreate-sandbox` deletes the existing
+     sandbox, so don't add it unless you mean to lose that sandbox's state. These
+     paths come from reading the source; none was run on `my-hermes`.
+   - **To keep that sandbox's state, onboard a new name.** This ran on 2026-11-04,
+     with the key exported as above:
+
+     ```bash
+     NEMOCLAW_PROVIDER=build NEMOCLAW_MODEL=nvidia/nemotron-3-ultra-550b-a55b NEMOCLAW_POLICY_TIER=balanced NEMOCLAW_POLICY_MODE=suggested nemohermes onboard --non-interactive --fresh --name my-hermes-demo
+     ```
+
+     The new sandbox reached phase `Ready`, and inference answered. Its env held
+     only a placeholder, and its policy matched `harness/policy-B.yaml`.
+     `my-hermes` didn't change. The new sandbox became the default, so run
+     `nemohermes use <name>` to change it.
+8. Revoke the throwaway key at build.nvidia.com. Then rerun an inference test.
+   While both keys are valid, a pass can't show which key the provider holds.
 9. `colima stop`.
 
 ## 9. Model cost path
